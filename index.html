@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KM Matekhonlap - Személyre Szabott Matematika Oktatás</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #10b981;
+            --light-color: #f3f4f6;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 2rem;
+        }
+
+        section:nth-child(even) {
+            background: var(--light-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .stat {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.75rem;
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 1rem;
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            background: var(--text-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .subject-pills {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .pill.accent {
+            background: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">📐 KM Matekhonlap</div>
+            <ul>
+                <li><a href="#tantargyak">Tantárgyak</a></li>
+                <li><a href="#csomagok">Csomagok</a></li>
+                <li><a href="#rolunk">Rólunk</a></li>
+                <li><a href="#faq">GYIK</a></li>
+                <li><a href="#kapcsolat">Kapcsolat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <hero>
+        <div class="hero-content">
+            <h1>Matematika könnyen és szórakoztatóan</h1>
+            <p>Személyre szabott oktatás, amely tényleg működik. Alsóstól az érettségiig, minden szinten.</p>
+            <a href="#kapcsolat" class="btn">Kezdjünk el</a>
+            <a href="#csomagok" class="btn btn-secondary" style="margin-left: 1rem;">Nézd meg a csomagokat</a>
+        </div>
+    </hero>
+
+    <!-- Subjects Section -->
+    <section id="tantargyak">
+        <div class="container">
+            <h2>Mit tanítunk?</h2>
+            <p class="subtitle">Összes korosztály, minden szint</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">📐</div>
+                    <h3>Matematika</h3>
+                    <p>Az alapoktól az emelt szintig. Egyenletek, függvények, geometria, statisztika – mindent megtanítunk úgy, hogy tényleg megértsed.</p>
+                    <ul class="features-list">
+                        <li>Általános iskola</li>
+                        <li>Középiskola</li>
+                        <li>Érettségi felkészítés</li>
+                        <li>Felvételi felkészítés</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Fizika</h3>
+                    <p>Mechanika, hő- és elektromosságtan. A fizika nem bonyolult – csak jól kell megmagyarázni vele, és már világos is.</p>
+                    <ul class="features-list">
+                        <li>Kinematika</li>
+                        <li>Dinamika</li>
+                        <li>Termodinamika</li>
+                        <li>Elektromosságtan</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚛️</div>
+                    <h3>Kémia</h3>
+                    <p>Szerves és szervetlen kémia. Megérted, hogy miért történnek az átalakulások, és nem csak megjegyzed őket.</p>
+                    <ul class="features-list">
+                        <li>Általános kémia</li>
+                        <li>Szerves kémia</li>
+                        <li>Képletek és reakciók</li>
+                        <li>Laboratóriumi ismeretek</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="subject-pills">
+                <span class="pill">📐 Matematika</span>
+                <span class="pill accent">🔬 Fizika</span>
+                <span class="pill">⚛️ Kémia</span>
+                <span class="pill accent">📚 Felkészítés</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="csomagok">
+        <div class="container">
+            <h2>Oktatási Csomagok</h2>
+            <p class="subtitle">Válassz az igényeidnek megfelelő csomagot</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">⏰</div>
+                    <h3>Alkalmi Óra</h3>
+                    <p>Egyedi óra, szabad időpontban. Teljesen rugalmas és egyszerű oktatás.</p>
+                    <ul class="features-list">
+                        <li>90 perc oktatás</li>
+                        <li>Egyedi érdeklődések szerint</li>
+                        <li>Azonnali visszajelzés</li>
+                        <li>Szóban jegyzetelés</li>
+                    </ul>
+                    <div class="package-price">8.000 Ft</div>
+                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+                </div>
+                <div class="card" style="border: 2px solid var(--accent-color);">
+                    <div class="card-icon">⭐ Ajánlott</div>
+                    <h3>Heti Csomag</h3>
+                    <p>Hetente egy alkalommal ismétlődő órák. Rendszeres fejlődéshez ideális.</p>
+                    <ul class="features-list">
+                        <li>Hetente 1x 90 perc</li>
+                        <li>Folyamatos követés</li>
+                        <li>Havi fejlődési értékelés</li>
+                        <li>Takarékos árat</li>
+                    </ul>
+                    <div class="package-price">28.000 Ft/hó</div>
+                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Intenzív Felkészítés</h3>
+                    <p>Érettségi vagy felvételi vizsgára készüléshez. Gyors és célzott tanulás.</p>
+                    <ul class="features-list">
+                        <li>Hetente 2x 90 perc</li>
+                        <li>Gyakorlófeladatok</li>
+                        <li>Mintavizsgák</li>
+                        <li>Teljes vizsgatananyag</li>
+                    </ul>
+                    <div class="package-price">50.000 Ft/hó</div>
+                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="rolunk">
+        <div class="container">
+            <h2>Miért Szeressenek Minket?</h2>
+            <div class="about-grid">
+                <div>
+                    <div class="stat">
+                        <div class="stat-number">8+</div>
+                        <p>év oktatási tapasztalat</p>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <p>zufrieden diák</p>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">95%</div>
+                        <p>sikeres vizsgák</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Személyre Szabott Oktatás</h3>
+                    <p>Nem hiszünk az egyforma módszerekben. Mindegyik diák más, ezért minden órát az ő igényei szerint készítünk el.</p>
+                    <p style="margin-top: 1rem;">A Fazekas (matematika) középiskolában végzett szerzőnk ELTE-s diploma mellett 8 éves tapasztalattal rendelkezik az oktatásban. Az alapoktól az emelt szintig mindent tud tanítani.</p>
+                    <p style="margin-top: 1rem;"><strong>A mi mottoónk: "Legyél ötös! De csak azért, mert érted!"</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <h2>Gyakori Kérdések</h2>
+            <p class="subtitle">Válaszok az összes legfontosabb kérdésre</p>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Milyen szinteken tanítsz?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        Matematika, fizika és kémia oktatást nyújtok minden közoktatási szintekről: általános iskola, alsó és felső tagozat, középiskola, valamint érettségi szint. Akár 1-2. osztálytól az emelt szintű érettségiig – mindenben segítünk!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Hol zajlanak az órák?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        Az órák személyesen zajlanak a lakóhelyem közelében, Budapest XII. kerületében. Az időpontok rugalmasan egyeztethetők a diák és szülők igényei szerint. Haladó: online órák is lehetségesek videócsevegés vagy egyéb platformok segítségével.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Mennyi az óradíj?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        Az árak személyre szab ottok az óra típusa és tartama alapján:
+                        <br>• Alkalmi órák: 8.000 Ft/90 perc
+                        <br>• Heti csomag: 28.000 Ft/hó (1x/hét)
+                        <br>• Intenzív: 50.000 Ft/hó (2x/hét)
+                        <br>Lehetséges kedvezmények csoportos foglalás vagy hosszú távú szerződés esetén.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Hogyan foglalok le egy órát?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        Egyszerű! Kattints az "Érdeklődöm" gombra az egyik csomagnál, vagy vegyél fel velünk kapcsolatot az alábbi eléréseken keresztül. Szívesen megbeszéljük a lehetséges időpontokat és válaszolunk az összes kérdésedre.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                        <span>Szükséges előzetes tapasztalat?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer" style="display: none;">
+                        Nem! Akár 0-ról kezdünk. Az az ideális, hogy találkozunk egy ingyenes bemutató órára, ahol megbeszéljük a célokat și a jelenlegi szintet. Alapján készítünk egy személyre szabott tanulási tervet.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kapcsolat">
+        <div class="container">
+            <h2>Kezdjük el a Tanulást!</h2>
+            <p class="subtitle">Vegyél fel velünk kapcsolatot – szívesen megbeszéljük a tanulási tervedet</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>📧 E-mail</h3>
+                    <p><a href="mailto:contact@kmatekhonlap.hu">contact@kmatekhonlap.hu</a></p>
+                    <p style="color: #999; font-size: 0.9rem;">Válasz 24 órán belül</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 Telefon</h3>
+                    <p><a href="tel:+36701234567">+36 70 123 4567</a></p>
+                    <p style="color: #999; font-size: 0.9rem;">Hétfő - Péntek: 14:00 - 20:00</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📍 Helyszín</h3>
+                    <p>Budapest, XII. kerület</p>
+                    <p style="color: #999; font-size: 0.9rem;">De online órák is lehetségesek!</p>
+                </div>
+            </div>
+
+            <div style="max-width: 600px; margin: 3rem auto; background: var(--light-color); padding: 2rem; border-radius: 0.75rem;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Írj Nekünk Egy Üzenetet</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Teljes Név *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail Cím *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Tárgy *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Üzenet *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Küldés</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>© 2026 KM Matekhonlap</strong></p>
+            <p>Személyre szabott matematika, fizika és kémia oktatás Budapest területén.</p>
+            <p style="margin-top: 1rem;">
+                <a href="#kapcsolat">Kapcsolat</a> | 
+                <a href="mailto:contact@kmatekhonlap.hu">E-mail</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isOpen = answer.style.display !== 'none';
+                answer.style.display = isOpen ? 'none' : 'block';
+                this.parentElement.classList.toggle('active');
+            });
+        });
+
+        // Form submit handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would normally send this data to a server
+            alert(`Köszönjük az üzenetedet, ${name}! Hamarosan válaszolunk!`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
