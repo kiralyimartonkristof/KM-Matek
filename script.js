@@ -330,7 +330,7 @@
   });
 
   /* ── Phone number reveal on click - hidden by default ───── */
-  const phoneNumber = '+36 70 602 9845';
+  const phoneNumber = '+36 20 234 5601';
   
   // Phone button in pickup section
   const phoneContainer = document.querySelector('.phone-number-container');
