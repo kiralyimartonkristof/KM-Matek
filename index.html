@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KM Matekhonlap - Személyre Szabott Matematika Oktatás</title>
+    <title>KM Matekhonlap - Modern matekoktatás Budapesten</title>
+    <meta name="description" content="Személyre szabott matematika, fizika és kémia oktatás Budapesten. Rendszeres korrepetálás, érettségi felkészítés és felvételi támogatás.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,665 +16,1433 @@
         }
 
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #10b981;
-            --light-color: #f3f4f6;
-            --text-color: #1f2937;
-            --border-color: #e5e7eb;
+            --bg: #f6f4ef;
+            --bg-soft: #f1ece3;
+            --surface: rgba(255, 255, 255, 0.68);
+            --surface-strong: rgba(255, 255, 255, 0.9);
+            --surface-dark: #18222f;
+            --text: #18212b;
+            --muted: #5f6b76;
+            --line: rgba(24, 33, 43, 0.1);
+            --brand: #1d5c63;
+            --brand-strong: #123f45;
+            --accent: #f28f3b;
+            --accent-soft: #ffe1c7;
+            --success: #4a8f72;
+            --shadow-lg: 0 24px 60px rgba(21, 33, 44, 0.12);
+            --shadow-md: 0 18px 40px rgba(21, 33, 44, 0.08);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 14px;
+            --container: 1180px;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
+            font-family: "Manrope", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(242, 143, 59, 0.18), transparent 22%),
+                radial-gradient(circle at top right, rgba(29, 92, 99, 0.16), transparent 28%),
+                linear-gradient(180deg, #fbfaf7 0%, var(--bg) 52%, #efe8dc 100%);
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        header {
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: auto;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.35;
         }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
+        body::before {
+            top: -80px;
+            right: -110px;
+            background: rgba(29, 92, 99, 0.24);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+        body::after {
+            bottom: -120px;
+            left: -80px;
+            background: rgba(242, 143, 59, 0.18);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-color);
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary-color);
-        }
-
-        hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid var(--accent-color);
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #059669;
-            border-color: #059669;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary-color);
+        a {
+            color: inherit;
         }
 
         .container {
-            max-width: 1200px;
+            width: min(var(--container), calc(100% - 40px));
             margin: 0 auto;
-            padding: 0 2rem;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 18px;
+            z-index: 50;
+            padding: 18px 0 0;
+        }
+
+        .nav-shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(20px);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--brand), #2d7981);
+            color: #fff;
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .brand-text strong,
+        h1,
+        h2,
+        h3,
+        .stat-value,
+        .price,
+        .eyebrow,
+        .section-kicker,
+        .faq-toggle {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-text strong {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .brand-text span {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            background: rgba(29, 92, 99, 0.08);
+            color: var(--brand-strong);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: var(--text);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 14px 28px rgba(24, 33, 43, 0.2);
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .nav-cta:hover,
+        .nav-cta:focus-visible,
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(24, 33, 43, 0.18);
+            outline: none;
+        }
+
+        main {
+            padding-bottom: 48px;
+        }
+
+        .hero {
+            padding: 72px 0 42px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .hero-panel,
+        .glass-card,
+        .subject-card,
+        .pricing-card,
+        .contact-card,
+        .faq-item,
+        .form-shell,
+        .insight-card,
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-panel {
+            position: relative;
+            padding: 42px;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(29, 92, 99, 0.9), rgba(25, 39, 60, 0.9)),
+                radial-gradient(circle at top right, rgba(242, 143, 59, 0.34), transparent 28%);
+            z-index: -2;
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            inset: auto -80px -120px auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(242, 143, 59, 0.18);
+            filter: blur(24px);
+            z-index: -1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(242, 143, 59, 0.16);
+        }
+
+        h1 {
+            font-size: clamp(2.9rem, 5vw, 5.1rem);
+            line-height: 0.96;
+            color: #fff;
+            letter-spacing: -0.05em;
+            max-width: 10ch;
+        }
+
+        .hero-lead {
+            margin-top: 22px;
+            max-width: 58ch;
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 52px;
+            padding: 0 20px;
+            border: 0;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #ffb26c, var(--accent));
+            color: #21160d;
+            box-shadow: 0 18px 36px rgba(242, 143, 59, 0.28);
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .hero-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .hero-chip {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.92rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .hero-side {
+            display: grid;
+            gap: 20px;
+        }
+
+        .glass-card {
+            padding: 28px;
+            border-radius: var(--radius-xl);
+        }
+
+        .hero-stat-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .hero-stat-head p {
+            color: var(--muted);
+            max-width: 28ch;
+        }
+
+        .badge-stack {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(29, 92, 99, 0.08);
+            color: var(--brand-strong);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .metric-card {
+            padding: 18px;
+            border-radius: 22px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brand-strong);
+            letter-spacing: -0.04em;
+        }
+
+        .stat-label {
+            font-size: 0.92rem;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .timeline-marker {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(29, 92, 99, 0.16), rgba(242, 143, 59, 0.16));
+            color: var(--brand-strong);
+            font-weight: 800;
+        }
+
+        .timeline-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .timeline-item p {
+            color: var(--muted);
+            font-size: 0.96rem;
         }
 
         section {
-            padding: 4rem 2rem;
+            padding: 30px 0;
         }
 
-        section:nth-child(even) {
-            background: var(--light-color);
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--brand);
+            margin-bottom: 10px;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--primary-color);
+            font-size: clamp(2rem, 3.3vw, 3.2rem);
+            letter-spacing: -0.05em;
+            line-height: 0.98;
         }
 
-        .subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+        .section-head p,
+        .section-copy,
+        .subject-card p,
+        .pricing-card p,
+        .insight-card p,
+        .contact-card p,
+        .form-note,
+        .faq-answer,
+        footer p {
+            color: var(--muted);
         }
 
-        .grid {
+        .section-head p {
+            max-width: 50ch;
+        }
+
+        .subject-grid,
+        .pricing-grid,
+        .contact-grid,
+        .insight-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+        .subject-grid,
+        .pricing-grid,
+        .contact-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .card:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .features-list {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .features-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+        .subject-card,
+        .pricing-card,
+        .contact-card {
             position: relative;
+            padding: 26px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
         }
 
-        .features-list li:before {
-            content: "✓";
+        .subject-card::before,
+        .pricing-card::before,
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 200ms ease;
+            pointer-events: none;
+        }
+
+        .subject-card:hover,
+        .pricing-card:hover,
+        .contact-card:hover,
+        .faq-item:hover,
+        .insight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .subject-card:hover::before,
+        .pricing-card:hover::before,
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .icon-wrap {
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, rgba(29, 92, 99, 0.14), rgba(242, 143, 59, 0.22));
+            color: var(--brand-strong);
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .subject-card h3,
+        .pricing-card h3,
+        .contact-card h3,
+        .insight-card h3 {
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 10px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 24px;
+            color: var(--text);
+        }
+
+        .feature-list li::before {
+            content: "";
             position: absolute;
             left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ffbd82);
+            box-shadow: 0 0 0 5px rgba(242, 143, 59, 0.12);
         }
 
-        .package-price {
-            font-size: 2rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            margin: 1rem 0;
+        .tag-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(24, 33, 43, 0.08);
+            color: var(--brand-strong);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(180deg, rgba(29, 92, 99, 0.9), rgba(18, 63, 69, 0.92));
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .pricing-card.featured p,
+        .pricing-card.featured .feature-list li,
+        .pricing-card.featured .price-caption,
+        .pricing-card.featured .package-meta {
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .pricing-card.featured .icon-wrap {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .pricing-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(29, 92, 99, 0.08);
+            color: var(--brand-strong);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .pricing-card.featured .pill {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .price {
+            margin-top: 24px;
+            font-size: 2.5rem;
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            color: var(--brand-strong);
+        }
+
+        .price-caption,
+        .package-meta {
+            font-size: 0.93rem;
+        }
+
+        .package-meta {
+            margin-top: 12px;
+        }
+
+        .pricing-card .button {
+            margin-top: 22px;
+            width: 100%;
+        }
+
+        .pricing-card:not(.featured) .button {
+            background: var(--text);
+            color: #fff;
+        }
+
+        .pricing-card.featured .button {
+            background: linear-gradient(135deg, #ffb26c, var(--accent));
+            color: #1e140b;
         }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin: 2rem 0;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 22px;
         }
 
-        .stat {
-            padding: 1.5rem;
-            background: white;
-            border-radius: 0.75rem;
-            border-left: 4px solid var(--primary-color);
-            margin-bottom: 1rem;
+        .insight-card {
+            padding: 28px;
+            border-radius: var(--radius-xl);
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-color);
+        .insight-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 24px;
+        }
+
+        .micro-stat {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(24, 33, 43, 0.08);
+        }
+
+        .micro-stat strong {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--brand-strong);
+            letter-spacing: -0.04em;
+        }
+
+        .micro-stat span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .section-card-grid {
+            display: grid;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 14px;
         }
 
         .faq-item {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
+            padding: 20px 22px;
+            border-radius: 22px;
+            transition: transform 180ms ease, box-shadow 180ms ease;
         }
 
-        .faq-question {
-            font-weight: 600;
-            color: var(--primary-color);
-            cursor: pointer;
+        .faq-toggle {
+            width: 100%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: transparent;
+            border: 0;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.02rem;
+            color: var(--text);
+        }
+
+        .faq-toggle span:last-child {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(29, 92, 99, 0.08);
+            color: var(--brand-strong);
+            font-size: 1.35rem;
+            transition: transform 180ms ease, background-color 180ms ease;
+        }
+
+        .faq-item.is-open .faq-toggle span:last-child {
+            transform: rotate(45deg);
+            background: rgba(242, 143, 59, 0.16);
         }
 
         .faq-answer {
-            margin-top: 1rem;
-            color: #6b7280;
-            line-height: 1.8;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 220ms ease, margin-top 220ms ease;
         }
 
-        .contact-grid {
+        .faq-item.is-open .faq-answer {
+            max-height: 220px;
+            margin-top: 12px;
+        }
+
+        .contact-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 22px;
+            align-items: start;
         }
 
-        .contact-item {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .contact-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-item p {
-            font-size: 1.1rem;
-            color: #6b7280;
-        }
-
-        .contact-item a {
-            color: var(--primary-color);
+        .contact-card a {
+            color: var(--brand-strong);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .contact-item a:hover {
+        .contact-card a:hover {
             text-decoration: underline;
+        }
+
+        .contact-card small {
+            display: block;
+            margin-top: 6px;
+            color: var(--muted);
+        }
+
+        .form-shell {
+            padding: 28px;
+            border-radius: var(--radius-xl);
+        }
+
+        .form-shell h3 {
+            font-size: 1.4rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            display: grid;
+            gap: 8px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-color);
+        .form-group.full {
+            grid-column: 1 / -1;
         }
 
-        .form-group input,
-        .form-group textarea {
+        label {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--text);
+        }
+
+        input,
+        textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            font-family: inherit;
-            font-size: 1rem;
+            padding: 15px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(24, 33, 43, 0.1);
+            background: rgba(255, 255, 255, 0.72);
+            color: var(--text);
+            font: inherit;
+            transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
         }
 
-        .form-group textarea {
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: rgba(29, 92, 99, 0.36);
+            box-shadow: 0 0 0 4px rgba(29, 92, 99, 0.1);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 140px;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .form-note {
+            font-size: 0.92rem;
         }
 
         footer {
-            background: var(--text-color);
-            color: white;
-            padding: 2rem;
-            text-align: center;
+            padding: 28px 0 56px;
         }
 
-        footer p {
-            margin-bottom: 0.5rem;
+        .footer-shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 22px 26px;
+            border-radius: 28px;
+            background: var(--surface-dark);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow-lg);
         }
 
-        footer a {
-            color: var(--accent-color);
+        .footer-shell a {
+            color: #ffd3ab;
             text-decoration: none;
         }
 
-        footer a:hover {
+        .footer-shell a:hover {
             text-decoration: underline;
         }
 
-        .subject-pills {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin: 2rem 0;
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 420ms ease, transform 420ms ease;
         }
 
-        .pill {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 2rem;
-            font-weight: 600;
-            font-size: 0.95rem;
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .pill.accent {
-            background: var(--accent-color);
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
             }
 
-            .hero-content h1 {
-                font-size: 2rem;
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
             }
+        }
 
-            .about-grid {
+        @media (max-width: 1080px) {
+            .hero-grid,
+            .about-grid,
+            .contact-layout,
+            .subject-grid,
+            .pricing-grid,
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
 
-            h2 {
-                font-size: 1.5rem;
+            .section-head,
+            .footer-shell,
+            .nav-shell {
+                align-items: flex-start;
+            }
+
+            .nav-shell {
+                border-radius: 28px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+
+            .hero-panel,
+            .glass-card,
+            .insight-card,
+            .form-shell {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                width: min(var(--container), calc(100% - 24px));
+            }
+
+            .site-header {
+                top: 8px;
+            }
+
+            .hero {
+                padding-top: 38px;
+            }
+
+            h1 {
+                max-width: none;
+                font-size: clamp(2.5rem, 12vw, 4rem);
+            }
+
+            .section-head {
+                margin-bottom: 20px;
+            }
+
+            .hero-actions,
+            .form-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-grid,
+            .stat-grid,
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-shell {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">📐 KM Matekhonlap</div>
-            <ul>
-                <li><a href="#tantargyak">Tantárgyak</a></li>
-                <li><a href="#csomagok">Csomagok</a></li>
-                <li><a href="#rolunk">Rólunk</a></li>
-                <li><a href="#faq">GYIK</a></li>
-                <li><a href="#kapcsolat">Kapcsolat</a></li>
-            </ul>
-        </nav>
+    <header class="site-header">
+        <div class="container">
+            <div class="nav-shell" data-reveal>
+                <a class="brand" href="#top" aria-label="KM Matekhonlap kezdőlap">
+                    <span class="brand-mark">KM</span>
+                    <span class="brand-text">
+                        <strong>KM Matekhonlap</strong>
+                        <span>Modern korrepetálás és vizsgafelkészítés</span>
+                    </span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#tantargyak">Tantárgyak</a></li>
+                    <li><a href="#csomagok">Csomagok</a></li>
+                    <li><a href="#rolam">Szakmai háttér</a></li>
+                    <li><a href="#faq">GYIK</a></li>
+                    <li><a href="#kapcsolat">Kapcsolat</a></li>
+                </ul>
+                <a class="nav-cta" href="#kapcsolat">Időpont egyeztetés</a>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <hero>
-        <div class="hero-content">
-            <h1>Matematika könnyen és szórakoztatóan</h1>
-            <p>Személyre szabott oktatás, amely tényleg működik. Alsóstól az érettségiig, minden szinten.</p>
-            <a href="#kapcsolat" class="btn">Kezdjünk el</a>
-            <a href="#csomagok" class="btn btn-secondary" style="margin-left: 1rem;">Nézd meg a csomagokat</a>
-        </div>
-    </hero>
+    <main id="top">
+        <section class="hero">
+            <div class="container hero-grid">
+                <article class="hero-panel" data-reveal>
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        Budapest XI. kerület, személyes és online órák
+                    </div>
+                    <h1>Mateksiker, nyugodt tempóban, valódi megértéssel.</h1>
+                    <p class="hero-lead">Személyre szabott matematika, fizika és kémia oktatás általános iskolától az érettségiig. A cél nem csak a jobb jegy, hanem a stabil tudás, amit a diák önállóan is tud használni.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#kapcsolat">Kezdjük el a tanulást</a>
+                        <a class="button button-secondary" href="#csomagok">Csomagok megtekintése</a>
+                    </div>
+                    <div class="hero-strip">
+                        <span class="hero-chip">8 év tapasztalat</span>
+                        <span class="hero-chip">ELTE matematika szak</span>
+                        <span class="hero-chip">Érettségi és felvételi fókusz</span>
+                    </div>
+                </article>
 
-    <!-- Subjects Section -->
-    <section id="tantargyak">
-        <div class="container">
-            <h2>Mit tanítunk?</h2>
-            <p class="subtitle">Összes korosztály, minden szint</p>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon">📐</div>
-                    <h3>Matematika</h3>
-                    <p>Az alapoktól az emelt szintig. Egyenletek, függvények, geometria, statisztika – mindent megtanítunk úgy, hogy tényleg megértsed.</p>
-                    <ul class="features-list">
-                        <li>Általános iskola</li>
-                        <li>Középiskola</li>
-                        <li>Érettségi felkészítés</li>
-                        <li>Felvételi felkészítés</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🔬</div>
-                    <h3>Fizika</h3>
-                    <p>Mechanika, hő- és elektromosságtan. A fizika nem bonyolult – csak jól kell megmagyarázni vele, és már világos is.</p>
-                    <ul class="features-list">
-                        <li>Kinematika</li>
-                        <li>Dinamika</li>
-                        <li>Termodinamika</li>
-                        <li>Elektromosságtan</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <div class="card-icon">⚛️</div>
-                    <h3>Kémia</h3>
-                    <p>Szerves és szervetlen kémia. Megérted, hogy miért történnek az átalakulások, és nem csak megjegyzed őket.</p>
-                    <ul class="features-list">
-                        <li>Általános kémia</li>
-                        <li>Szerves kémia</li>
-                        <li>Képletek és reakciók</li>
-                        <li>Laboratóriumi ismeretek</li>
-                    </ul>
+                <div class="hero-side">
+                    <aside class="glass-card" data-reveal>
+                        <div class="hero-stat-head">
+                            <div>
+                                <div class="section-kicker">Gyors áttekintés</div>
+                                <h3>Letisztult rendszer, követhető fejlődés</h3>
+                            </div>
+                            <div class="badge-stack">Fazekas háttér</div>
+                        </div>
+                        <p>Minden órán cél, struktúra és azonnali visszajelzés van. A diák pontosan látja, miben fejlődött és mi a következő lépés.</p>
+                        <div class="stat-grid">
+                            <div class="metric-card">
+                                <div class="stat-value">1:1</div>
+                                <div class="stat-label">egyéni figyelem</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="stat-value">90p</div>
+                                <div class="stat-label">átgondolt órák</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="stat-value">XI.</div>
+                                <div class="stat-label">budapesti helyszín</div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <aside class="glass-card" data-reveal>
+                        <div class="section-kicker">Hogyan dolgozunk</div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1</div>
+                                <div>
+                                    <strong>Szintfelmérés</strong>
+                                    <p>Rövid beszélgetés és célmeghatározás az aktuális tudásszint alapján.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2</div>
+                                <div>
+                                    <strong>Személyre szabott terv</strong>
+                                    <p>Tematikus haladás a hiányosságok és a vizsgacélok szerint.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">3</div>
+                                <div>
+                                    <strong>Folyamatos visszacsatolás</strong>
+                                    <p>Gyakorlófeladatok, ismétlés és jól követhető fejlődési pontok.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
             </div>
-            <div class="subject-pills">
-                <span class="pill">📐 Matematika</span>
-                <span class="pill accent">🔬 Fizika</span>
-                <span class="pill">⚛️ Kémia</span>
-                <span class="pill accent">📚 Felkészítés</span>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Packages Section -->
-    <section id="csomagok">
-        <div class="container">
-            <h2>Oktatási Csomagok</h2>
-            <p class="subtitle">Válassz az igényeidnek megfelelő csomagot</p>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon">⏰</div>
-                    <h3>Alkalmi Óra</h3>
-                    <p>Egyedi óra, szabad időpontban. Teljesen rugalmas és egyszerű oktatás.</p>
-                    <ul class="features-list">
-                        <li>90 perc oktatás</li>
-                        <li>Egyedi érdeklődések szerint</li>
-                        <li>Azonnali visszajelzés</li>
-                        <li>Szóban jegyzetelés</li>
-                    </ul>
-                    <div class="package-price">8.000 Ft</div>
-                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+        <section id="tantargyak">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <span class="section-kicker">Tantárgyak</span>
+                        <h2>Nem túl sok díszítés. Jó struktúra, pontos magyarázat, biztosabb eredmények.</h2>
+                    </div>
+                    <p>Az órák a diák tempójához igazodnak. Az alapok rendezése ugyanannyira fontos, mint az emelt szintű problémamegoldás vagy a vizsgastratégia.</p>
                 </div>
-                <div class="card" style="border: 2px solid var(--accent-color);">
-                    <div class="card-icon">⭐ Ajánlott</div>
-                    <h3>Heti Csomag</h3>
-                    <p>Hetente egy alkalommal ismétlődő órák. Rendszeres fejlődéshez ideális.</p>
-                    <ul class="features-list">
-                        <li>Hetente 1x 90 perc</li>
-                        <li>Folyamatos követés</li>
-                        <li>Havi fejlődési értékelés</li>
-                        <li>Takarékos árat</li>
-                    </ul>
-                    <div class="package-price">28.000 Ft/hó</div>
-                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+
+                <div class="subject-grid">
+                    <article class="subject-card" data-reveal>
+                        <div class="icon-wrap">∑</div>
+                        <h3>Matematika</h3>
+                        <p>Általános iskolától az érettségiig: algebra, geometria, függvények, valószínűségszámítás és célzott vizsgafelkészítés.</p>
+                        <ul class="feature-list">
+                            <li>felzárkóztatás és stabil alapok</li>
+                            <li>közép- és emelt szintű érettségi</li>
+                            <li>felvételi feladattípusok gyakorlása</li>
+                            <li>önálló gondolkodás fejlesztése</li>
+                        </ul>
+                    </article>
+
+                    <article class="subject-card" data-reveal>
+                        <div class="icon-wrap">Δv</div>
+                        <h3>Fizika</h3>
+                        <p>Nem képletbemagolásra épít, hanem arra, hogy a diák lássa az összefüggéseket és értse a modelleket.</p>
+                        <ul class="feature-list">
+                            <li>mechanika és kinematika</li>
+                            <li>elektromosságtan és hőtan</li>
+                            <li>feladattípusok lépésről lépésre</li>
+                            <li>vizuális és intuitív magyarázatok</li>
+                        </ul>
+                    </article>
+
+                    <article class="subject-card" data-reveal>
+                        <div class="icon-wrap">H2O</div>
+                        <h3>Kémia</h3>
+                        <p>Szerves és szervetlen témák érthetően, rendszerbe szervezve. Nem csak a reakciók, hanem a mögöttük lévő logika is előkerül.</p>
+                        <ul class="feature-list">
+                            <li>képletek és reakciótípusok</li>
+                            <li>fogalomrendszer tisztázása</li>
+                            <li>érettségi fókuszú gyakorlás</li>
+                            <li>biztosabb feladatmegoldási rutin</li>
+                        </ul>
+                    </article>
                 </div>
-                <div class="card">
-                    <div class="card-icon">🚀</div>
-                    <h3>Intenzív Felkészítés</h3>
-                    <p>Érettségi vagy felvételi vizsgára készüléshez. Gyors és célzott tanulás.</p>
-                    <ul class="features-list">
-                        <li>Hetente 2x 90 perc</li>
-                        <li>Gyakorlófeladatok</li>
-                        <li>Mintavizsgák</li>
-                        <li>Teljes vizsgatananyag</li>
-                    </ul>
-                    <div class="package-price">50.000 Ft/hó</div>
-                    <button class="btn" onclick="alert('Hamarosan elérhető az online foglalás!')">Érdeklődöm</button>
+
+                <div class="tag-row" data-reveal>
+                    <span class="tag">Alsó és felső tagozat</span>
+                    <span class="tag">Középiskola</span>
+                    <span class="tag">Érettségi felkészítés</span>
+                    <span class="tag">Felvételi támogatás</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="rolunk">
-        <div class="container">
-            <h2>Miért Szeressenek Minket?</h2>
-            <div class="about-grid">
+        <section id="csomagok">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <span class="section-kicker">Csomagok</span>
+                        <h2>Átlátható ajánlatok, valós tanulási helyzetekre szabva.</h2>
+                    </div>
+                    <p>Az egyedi alkalomtól a rendszeres fejlődésen át a célzott vizsgafelkészítésig több ritmusban is lehet haladni.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="pricing-card" data-reveal>
+                        <div class="pricing-top">
+                            <div class="icon-wrap">01</div>
+                            <span class="pill">Rugalmas</span>
+                        </div>
+                        <h3>Alkalmi óra</h3>
+                        <p>Ha egy konkrét témát kell gyorsan rendbe tenni, vagy rövid határidő előtt kell átismételni az anyagot.</p>
+                        <div class="price">8.000 Ft</div>
+                        <div class="price-caption">90 perc / egyedi időpont</div>
+                        <ul class="feature-list">
+                            <li>célzott segítség egy-egy témában</li>
+                            <li>azonnali hibajavítás és visszajelzés</li>
+                            <li>rugalmas időpontfoglalás</li>
+                        </ul>
+                        <div class="package-meta">Ideális, ha gyorsan kell tisztázni egy elakadást.</div>
+                        <a class="button" href="#kapcsolat">Érdeklődöm</a>
+                    </article>
+
+                    <article class="pricing-card featured" data-reveal>
+                        <div class="pricing-top">
+                            <div class="icon-wrap">02</div>
+                            <span class="pill">Ajánlott</span>
+                        </div>
+                        <h3>Heti csomag</h3>
+                        <p>Rendszeres, kiszámítható fejlődéshez. Akkor működik a legjobban, ha fontos a hosszabb távú stabilitás és a folyamatos kontroll.</p>
+                        <div class="price">28.000 Ft/hó</div>
+                        <div class="price-caption">Hetente 1 alkalom, 90 perc</div>
+                        <ul class="feature-list">
+                            <li>folyamatos követés és visszajelzés</li>
+                            <li>ismétlés és gyakorlási ritmus</li>
+                            <li>tananyaghoz igazított haladás</li>
+                        </ul>
+                        <div class="package-meta">A legjobb választás a biztos jegyjavításhoz és egyenletes fejlődéshez.</div>
+                        <a class="button" href="#kapcsolat">Időpontot kérek</a>
+                    </article>
+
+                    <article class="pricing-card" data-reveal>
+                        <div class="pricing-top">
+                            <div class="icon-wrap">03</div>
+                            <span class="pill">Vizsga fókusz</span>
+                        </div>
+                        <h3>Intenzív felkészülés</h3>
+                        <p>Érettségi vagy felvételi előtt, amikor gyors ütemben kell felépíteni vagy rendszerezni a teljes anyagot.</p>
+                        <div class="price">50.000 Ft/hó</div>
+                        <div class="price-caption">Hetente 2 alkalom, 90 perc</div>
+                        <ul class="feature-list">
+                            <li>mintafeladatok és vizsgataktika</li>
+                            <li>fókusz a kritikus témákon</li>
+                            <li>hatékony, rövid ciklusú haladás</li>
+                        </ul>
+                        <div class="package-meta">Akkor érdemes választani, ha közel a vizsga és kevés az idő.</div>
+                        <a class="button" href="#kapcsolat">Konzultáció</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="rolam">
+            <div class="container about-grid">
+                <article class="insight-card" data-reveal>
+                    <span class="section-kicker">Szakmai háttér</span>
+                    <h2>Emberközpontú oktatás, komoly szakmai alapokkal.</h2>
+                    <p class="section-copy">Fazekas matekos közeg, ELTE matematika szak, 8 év oktatási tapasztalat. Az órák nem sablon alapján mennek: a diák erősségeire és hiányosságaira épülnek.</p>
+                    <div class="insight-grid">
+                        <div class="micro-stat">
+                            <strong>8 év</strong>
+                            <span>oktatási tapasztalat</span>
+                        </div>
+                        <div class="micro-stat">
+                            <strong>XI. kerület</strong>
+                            <span>személyes helyszín</span>
+                        </div>
+                        <div class="micro-stat">
+                            <strong>ELTE</strong>
+                            <span>matematika szak</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="insight-card" data-reveal>
+                    <span class="section-kicker">Módszer</span>
+                    <h3>Mitől működik jól?</h3>
+                    <div class="section-card-grid">
+                        <div class="micro-stat">
+                            <strong>Érthető tempó</strong>
+                            <span>Nem siet át azokon a pontokon, ahol a legtöbb bizonytalanság keletkezik.</span>
+                        </div>
+                        <div class="micro-stat">
+                            <strong>Aktív gondolkodás</strong>
+                            <span>A cél az, hogy a diák önállóan is tudjon jó döntéseket hozni feladatmegoldás közben.</span>
+                        </div>
+                        <div class="micro-stat">
+                            <strong>Mérhető haladás</strong>
+                            <span>Rendszeres gyakorlás, visszacsatolás és a nehéz pontok tudatos újravétele.</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <div>
+                        <span class="section-kicker">GYIK</span>
+                        <h2>Röviden a legfontosabb kérdésekről.</h2>
+                    </div>
+                    <p>Ha a lenti válaszok után marad nyitott kérdés, érdemes közvetlenül írni vagy telefonon egyeztetni.</p>
+                </div>
+
+                <div class="faq-list">
+                    <article class="faq-item" data-reveal>
+                        <button class="faq-toggle" type="button" aria-expanded="false">
+                            <span>Milyen szinteken érhető el az oktatás?</span>
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Matematika, fizika és kémia oktatás elérhető általános iskolától a középiskolán át az érettségiig. A fókusz lehet felzárkóztatás, rendszeres korrepetálás vagy célzott vizsgafelkészítés.
+                        </div>
+                    </article>
+
+                    <article class="faq-item" data-reveal>
+                        <button class="faq-toggle" type="button" aria-expanded="false">
+                            <span>Hol zajlanak az órák?</span>
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            A személyes órák Budapest XI. kerületében érhetők el, de online forma is megoldható. Az időpontok rugalmasan igazíthatók a diák és a család napirendjéhez.
+                        </div>
+                    </article>
+
+                    <article class="faq-item" data-reveal>
+                        <button class="faq-toggle" type="button" aria-expanded="false">
+                            <span>Mennyi az óradíj?</span>
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Az alkalmi óra 8.000 Ft, a heti csomag 28.000 Ft havonta, az intenzív felkészítés 50.000 Ft havonta. A megfelelő csomag kiválasztása mindig a cél és a rendelkezésre álló idő alapján történik.
+                        </div>
+                    </article>
+
+                    <article class="faq-item" data-reveal>
+                        <button class="faq-toggle" type="button" aria-expanded="false">
+                            <span>Hogyan indul el a közös munka?</span>
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Első lépésként egy rövid egyeztetés történik e-mailben vagy telefonon. Ez alapján ki lehet jelölni a célt, az induló szintet és az ehhez illeszkedő órarendet.
+                        </div>
+                    </article>
+
+                    <article class="faq-item" data-reveal>
+                        <button class="faq-toggle" type="button" aria-expanded="false">
+                            <span>Mi van, ha a diák nagyon bizonytalan az alapokban?</span>
+                            <span>+</span>
+                        </button>
+                        <div class="faq-answer">
+                            Ez gyakori helyzet. Ilyenkor nem a tempó erőltetése a cél, hanem a hiányzó építőelemek rendezése. A biztos alapok szinte mindig gyorsabban javítják az eredményeket, mint a kapkodó anyaglefedés.
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="kapcsolat">
+            <div class="container contact-layout">
                 <div>
-                    <div class="stat">
-                        <div class="stat-number">8+</div>
-                        <p>év oktatási tapasztalat</p>
+                    <div class="section-head" data-reveal>
+                        <div>
+                            <span class="section-kicker">Kapcsolat</span>
+                            <h2>Kezdjük el a tanulást jól felépített rendszerben.</h2>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">500+</div>
-                        <p>zufrieden diák</p>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">95%</div>
-                        <p>sikeres vizsgák</p>
-                    </div>
-                </div>
-                <div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Személyre Szabott Oktatás</h3>
-                    <p>Nem hiszünk az egyforma módszerekben. Mindegyik diák más, ezért minden órát az ő igényei szerint készítünk el.</p>
-                    <p style="margin-top: 1rem;">A Fazekas (matematika) középiskolában végzett szerzőnk ELTE-s diploma mellett 8 éves tapasztalattal rendelkezik az oktatásban. Az alapoktól az emelt szintig mindent tud tanítani.</p>
-                    <p style="margin-top: 1rem;"><strong>A mi mottoónk: "Legyél ötös! De csak azért, mert érted!"</strong></p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section id="faq">
-        <div class="container">
-            <h2>Gyakori Kérdések</h2>
-            <p class="subtitle">Válaszok az összes legfontosabb kérdésre</p>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Milyen szinteken tanítsz?</span>
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer" style="display: none;">
-                        Matematika, fizika és kémia oktatást nyújtok minden közoktatási szintekről: általános iskola, alsó és felső tagozat, középiskola, valamint érettségi szint. Akár 1-2. osztálytól az emelt szintű érettségiig – mindenben segítünk!
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Hol zajlanak az órák?</span>
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer" style="display: none;">
-                        Az órák személyesen zajlanak a lakóhelyem közelében, Budapest XII. kerületében. Az időpontok rugalmasan egyeztethetők a diák és szülők igényei szerint. Haladó: online órák is lehetségesek videócsevegés vagy egyéb platformok segítségével.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Mennyi az óradíj?</span>
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer" style="display: none;">
-                        Az árak személyre szab ottok az óra típusa és tartama alapján:
-                        <br>• Alkalmi órák: 8.000 Ft/90 perc
-                        <br>• Heti csomag: 28.000 Ft/hó (1x/hét)
-                        <br>• Intenzív: 50.000 Ft/hó (2x/hét)
-                        <br>Lehetséges kedvezmények csoportos foglalás vagy hosszú távú szerződés esetén.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Hogyan foglalok le egy órát?</span>
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer" style="display: none;">
-                        Egyszerű! Kattints az "Érdeklődöm" gombra az egyik csomagnál, vagy vegyél fel velünk kapcsolatot az alábbi eléréseken keresztül. Szívesen megbeszéljük a lehetséges időpontokat és válaszolunk az összes kérdésedre.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
-                        <span>Szükséges előzetes tapasztalat?</span>
-                        <span>+</span>
-                    </div>
-                    <div class="faq-answer" style="display: none;">
-                        Nem! Akár 0-ról kezdünk. Az az ideális, hogy találkozunk egy ingyenes bemutató órára, ahol megbeszéljük a célokat și a jelenlegi szintet. Alapján készítünk egy személyre szabott tanulási tervet.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="contact-grid">
+                        <article class="contact-card" data-reveal>
+                            <div class="icon-wrap">@</div>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:kiraly.marton.tutor@gmail.com">kiraly.marton.tutor@gmail.com</a></p>
+                            <small>Általában 24 órán belül érkezik válasz.</small>
+                        </article>
 
-    <!-- Contact Section -->
-    <section id="kapcsolat">
-        <div class="container">
-            <h2>Kezdjük el a Tanulást!</h2>
-            <p class="subtitle">Vegyél fel velünk kapcsolatot – szívesen megbeszéljük a tanulási tervedet</p>
-            
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <h3>📧 E-mail</h3>
-                    <p><a href="mailto:contact@kmatekhonlap.hu">contact@kmatekhonlap.hu</a></p>
-                    <p style="color: #999; font-size: 0.9rem;">Válasz 24 órán belül</p>
-                </div>
-                <div class="contact-item">
-                    <h3>📱 Telefon</h3>
-                    <p><a href="tel:+36701234567">+36 70 123 4567</a></p>
-                    <p style="color: #999; font-size: 0.9rem;">Hétfő - Péntek: 14:00 - 20:00</p>
-                </div>
-                <div class="contact-item">
-                    <h3>📍 Helyszín</h3>
-                    <p>Budapest, XII. kerület</p>
-                    <p style="color: #999; font-size: 0.9rem;">De online órák is lehetségesek!</p>
-                </div>
-            </div>
+                        <article class="contact-card" data-reveal>
+                            <div class="icon-wrap">36</div>
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+36706029845">+36 70 602 9845</a></p>
+                            <small>Rugalmas egyeztetés hétköznap délután.</small>
+                        </article>
 
-            <div style="max-width: 600px; margin: 3rem auto; background: var(--light-color); padding: 2rem; border-radius: 0.75rem;">
-                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Írj Nekünk Egy Üzenetet</h3>
-                <form onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">Teljes Név *</label>
-                        <input type="text" id="name" name="name" required>
+                        <article class="contact-card" data-reveal>
+                            <div class="icon-wrap">XI</div>
+                            <h3>Helyszín</h3>
+                            <p>Budapest, XI. kerület</p>
+                            <small>Személyes és online órák is elérhetők.</small>
+                        </article>
                     </div>
-                    <div class="form-group">
-                        <label for="email">E-mail Cím *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Tárgy *</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Üzenet *</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%;">Küldés</button>
-                </form>
-            </div>
-        </div>
-    </section>
+                </div>
 
-    <!-- Footer -->
+                <aside class="form-shell" data-reveal>
+                    <h3>Rövid üzenetküldés</h3>
+                    <p class="form-note">Ez a demóverzió vizuális minta. A gomb jelenleg nem küld adatot szerverre, csak visszajelzést ad.</p>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Név</label>
+                                <input id="name" name="name" type="text" placeholder="Teljes név" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input id="email" name="email" type="email" placeholder="email@pelda.hu" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="subject">Miben segíthetek?</label>
+                                <input id="subject" name="subject" type="text" placeholder="Például: középszintű érettségi felkészítés" required>
+                            </div>
+                            <div class="form-group full">
+                                <label for="message">Üzenet</label>
+                                <textarea id="message" name="message" placeholder="Írd le röviden a jelenlegi szintet, a célt és azt, mikor lenne megfelelő az óra."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            <span class="form-note">Telefonos egyeztetéshez a fenti szám közvetlenül hívható.</span>
+                            <button class="button button-primary" type="submit">Üzenet elküldése</button>
+                        </div>
+                    </form>
+                </aside>
+            </div>
+        </section>
+    </main>
+
     <footer>
         <div class="container">
-            <p><strong>© 2026 KM Matekhonlap</strong></p>
-            <p>Személyre szabott matematika, fizika és kémia oktatás Budapest területén.</p>
-            <p style="margin-top: 1rem;">
-                <a href="#kapcsolat">Kapcsolat</a> | 
-                <a href="mailto:contact@kmatekhonlap.hu">E-mail</a>
-            </p>
+            <div class="footer-shell" data-reveal>
+                <div>
+                    <p><strong>© 2026 KM Matekhonlap</strong></p>
+                    <p>Személyre szabott matematika, fizika és kémia oktatás Budapest XI. kerületében.</p>
+                </div>
+                <p>
+                    <a href="mailto:kiraly.marton.tutor@gmail.com">kiraly.marton.tutor@gmail.com</a>
+                    ·
+                    <a href="tel:+36706029845">+36 70 602 9845</a>
+                </p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+        document.querySelectorAll('.faq-toggle').forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                const item = toggle.closest('.faq-item');
+                const expanded = toggle.getAttribute('aria-expanded') === 'true';
+
+                item.classList.toggle('is-open', !expanded);
+                toggle.setAttribute('aria-expanded', String(!expanded));
+            });
+        });
+
+        const revealElements = document.querySelectorAll('[data-reveal]');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        });
+        }, { threshold: 0.14 });
 
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                const isOpen = answer.style.display !== 'none';
-                answer.style.display = isOpen ? 'none' : 'block';
-                this.parentElement.classList.toggle('active');
-            });
-        });
+        revealElements.forEach((element) => revealObserver.observe(element));
 
-        // Form submit handler
         function handleSubmit(event) {
             event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would normally send this data to a server
-            alert(`Köszönjük az üzenetedet, ${name}! Hamarosan válaszolunk!`);
+            const name = document.getElementById('name').value.trim();
+            alert(`Koszonjuk az uzenetet, ${name || 'erdeklodo'}! Hamarosan jelentkezunk.`);
             event.target.reset();
         }
     </script>
