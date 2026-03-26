@@ -806,43 +806,12 @@ img {
   border-color: var(--gray-400);
 }
 
-/* Phone number reveal on click */
+/* Phone number reveal on click - hidden by default */
 .phone-number-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
+  display: inline-block;
   position: relative;
   cursor: pointer;
   user-select: none;
-}
-
-.phone-visible {
-  font-weight: 500;
-  color: var(--gray-600);
-  transition: color 0.2s ease;
-}
-
-.phone-hidden {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.phone-hidden.hidden {
-  max-width: 0;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.phone-blur {
-  filter: blur(8px);
-  opacity: 0.4;
-  color: var(--gray-400);
-  user-select: none;
-  pointer-events: none;
-  transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
 .phone-click-hint {
@@ -861,23 +830,25 @@ img {
   transition: color 0.2s ease;
   font-family: inherit;
   margin: 0;
+  display: inline;
 }
 
 .phone-click-hint:hover {
   color: var(--gray-600);
 }
 
-.phone-full {
+.phone-number-reveal {
+  display: none;
   font-weight: 500;
   color: var(--gray-600);
-  transition: display 0.3s ease;
+  transition: display 0.2s ease;
 }
 
-.phone-number-container.revealed .phone-hidden {
+.phone-number-container.revealed .phone-click-hint {
   display: none;
 }
 
-.phone-number-container.revealed .phone-full {
+.phone-number-container.revealed .phone-number-reveal {
   display: inline;
 }
 

@@ -329,14 +329,17 @@
     }, 200);
   });
 
-  /* ── Phone number reveal on click ───── */
+  /* ── Phone number reveal on click - hidden by default ───── */
   const phoneContainer = document.querySelector('.phone-number-container');
   const phoneClickHint = document.querySelector('.phone-click-hint');
+  const phoneNumberReveal = document.querySelector('.phone-number-reveal');
 
-  if (phoneContainer && phoneClickHint) {
+  if (phoneContainer && phoneClickHint && phoneNumberReveal) {
     phoneClickHint.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+      const fullNumber = phoneContainer.dataset.full;
+      phoneNumberReveal.textContent = fullNumber;
       phoneContainer.classList.add('revealed');
     });
   }
