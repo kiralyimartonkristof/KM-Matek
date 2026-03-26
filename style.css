@@ -806,6 +806,81 @@ img {
   border-color: var(--gray-400);
 }
 
+/* Phone number reveal on click */
+.phone-number-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.phone-visible {
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: color 0.2s ease;
+}
+
+.phone-hidden {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.phone-hidden.hidden {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.phone-blur {
+  filter: blur(8px);
+  opacity: 0.4;
+  color: var(--gray-400);
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.phone-click-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+  font-family: inherit;
+  margin: 0;
+}
+
+.phone-click-hint:hover {
+  color: var(--gray-600);
+}
+
+.phone-full {
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: display 0.3s ease;
+}
+
+.phone-number-container.revealed .phone-hidden {
+  display: none;
+}
+
+.phone-number-container.revealed .phone-full {
+  display: inline;
+}
+
 .pickup-map {
   border-radius: 20px;
   overflow: hidden;

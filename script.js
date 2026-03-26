@@ -329,6 +329,18 @@
     }, 200);
   });
 
+  /* ── Phone number reveal on click ───── */
+  const phoneContainer = document.querySelector('.phone-number-container');
+  const phoneClickHint = document.querySelector('.phone-click-hint');
+
+  if (phoneContainer && phoneClickHint) {
+    phoneClickHint.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      phoneContainer.classList.add('revealed');
+    });
+  }
+
 })();
 
 /* Hero card scroll functions */
