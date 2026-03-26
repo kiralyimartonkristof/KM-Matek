@@ -934,6 +934,15 @@ img {
   transform: translateX(4px);
 }
 
+.contact-phone-text {
+  display: inline;
+}
+
+.contact-phone-link.revealed .contact-phone-text {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
 /* Impresszum */
 .contact-impresszum {
   padding: 2rem;

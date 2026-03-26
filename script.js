@@ -330,17 +330,38 @@
   });
 
   /* ── Phone number reveal on click - hidden by default ───── */
+  const phoneNumber = '+36 70 602 9845';
+  
+  // Phone button in pickup section
   const phoneContainer = document.querySelector('.phone-number-container');
   const phoneClickHint = document.querySelector('.phone-click-hint');
   const phoneNumberReveal = document.querySelector('.phone-number-reveal');
 
-  if (phoneContainer && phoneClickHint && phoneNumberReveal) {
+  if (phoneClickHint && phoneNumberReveal) {
     phoneClickHint.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const fullNumber = phoneContainer.dataset.full;
-      phoneNumberReveal.textContent = fullNumber;
-      phoneContainer.classList.add('revealed');
+      phoneNumberReveal.textContent = phoneNumber;
+      if (phoneContainer) phoneContainer.classList.add('revealed');
+    });
+  }
+
+  // Contact phone link
+  const contactPhoneLink = document.querySelector('.contact-phone-link');
+  const contactPhoneText = document.querySelector('.contact-phone-text');
+
+  if (contactPhoneLink && contactPhoneText) {
+    contactPhoneLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (!contactPhoneLink.classList.contains('revealed')) {
+        contactPhoneText.textContent = phoneNumber;
+        contactPhoneLink.href = 'tel:' + phoneNumber.replace(/\s/g, '');
+        contactPhoneLink.classList.add('revealed');
+      } else {
+        window.location.href = contactPhoneLink.href;
+      }
     });
   }
 
