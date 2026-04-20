@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /index.html
+
 Disallow: /admin
 Disallow: /.env
-Disallow: /.*
 
-Sitemap: https://kitecucc.hu/sitemap.xml
+Sitemap: https://kiralyimatematika.hu/sitemap.xml
